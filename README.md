@@ -126,8 +126,8 @@ Check for successful data receipt from `Metricbeat` and then navigate to the das
 #### Configuring Web Servers
 The webservers are assumed to be available prior to installing and configuring Elasticseach.  If webservers are not already available, then the following steps can be utilized to deploy an instance of DVWA on the `[webservers]` e.g. DVWA-VMx (where x is VM1, VM2, etc..)
 
-- Copy the `pentest.yml` playbook file to the Ansible container folder `_/etc/ansible/files_`
+- Copy the `pentest.yml` playbook file to the Ansible container folder _`/etc/ansible/files`_
 
-- Update the `hosts` file in `_/etc/ansible/_` to include private IP under `[webservers]` (e.g. `10.1.0.5` for DVWA-VM1)
+- Update the `hosts` file in _`/etc/ansible/`_ to include private IP under `[webservers]` (e.g. `10.1.0.5` for DVWA-VM1)
 
 - Run the playbook using the command `ansible-playbook /etc/ansible/files/pentest.yml`.  Then, navigate to the public IP of the webserver loadbalancer (http://104.42.102.241) to check that the installation worked as expected (i.e. DVWA is up and running)
