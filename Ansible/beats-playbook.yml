@@ -1,0 +1,46 @@
+---
+- name: installing and launching filebeat and metricbeat
+  hosts: webservers
+  remote_user: sysadmin
+  become: yes
+  tasks:
+
+  - name: download filebeat deb
+    command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
+ 
+  - name: install filebeat deb
+    command: sudo dpkg -i filebeat-7.6.1-amd64.deb
+
+  - name: drop in filebeat.yml
+    copy:
+      src: ./filebeat.yml
+      dest: /etc/filebeat/filebeat.yml
+
+  - name: enable and configure system module
+    command: /usr/bin/filebeat modules enable system
+
+  - name: setup filebeat
+    command: /usr/bin/filebeat setup
+
+  - name: start filebeat service
+    command: service filebeat start
+
+  - name: download metricbeat deb
+    command: curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.6.1-amd64.deb
+ 
+  - name: install metricbeat deb
+    command: sudo dpkg -i metricbeat-7.6.1-amd64.deb
+
+  - name: drop in metricbeat.yml
+    copy:
+      src: ./metricbeat.yml
+      dest: /etc/metricbeat/metricbeat.yml
+
+  - name: enable and configure system module
+    command: /usr/bin/metricbeat modules enable system
+
+  - name: setup metricbeat
+    command: /usr/bin/metricbeat setup
+
+  - name: start metricbeat service
+    command: service metricbeat start
